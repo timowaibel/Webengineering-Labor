@@ -1,13 +1,17 @@
 FROM node:14
 
+# set the working directory
 WORKDIR /app
 
-COPY package*.json ./
-
+# install dependencies
+COPY package*.json /app
 RUN npm install
 
-#COPY . .
+# copy the rest of the files
+COPY . /app
 
+# expose port 3000
 EXPOSE 3000
 
-CMD ["npm", "run", "devStart"]
+# start the app
+CMD ["npm", "run", "start"]
