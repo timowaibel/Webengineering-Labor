@@ -1,9 +1,6 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const proxy = require('http-proxy-middleware');
 const path = require('path');
-
-dotenv.config();
 
 const app = express();
 

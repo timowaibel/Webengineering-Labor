@@ -11,6 +11,7 @@ services:
       - ./backend:/app
     environment:
       - PORT=3000
+      - API_BASE_URL=https://www.pegelonline.wsv.de/webservices/rest-api/v2
 
   frontend:
     build:

@@ -1,9 +1,12 @@
-const express = require('express');
-const dotenv = require('dotenv');
-
-dotenv.config();
+import express from 'express';
+import { watersRouter } from './routes/waters.js';
+import { measurementRouter } from './routes/measurement.js';
 
 const app = express();
+
+app.use('/waters', watersRouter);
+
+app.use('/measurements', measurementRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
