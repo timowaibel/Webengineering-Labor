@@ -20,10 +20,26 @@ This launches a local development server with a the backend and frontend running
 
 ### Run
 
-1. Run the following command in the root directory of the project
+1. Install the node dependencies for the backend and frontend
 
 ```bash
-docker-compose up -d
+cd ./backend
+npm install
+cd ../frontend
+npm install
+cd ..
+```
+
+2. Run the following command in the root directory of the project
+
+```bash
+docker-compose up --build 
+```
+
+If you want to run the containers detached (in the background) use the following command instead
+
+```bash
+docker-compose up --build -d
 ```
 
 ## Run Deployment Server (Kubernetes)

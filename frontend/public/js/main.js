@@ -16,12 +16,17 @@ searchForm.addEventListener('submit', async (event) => {
     const response = await fetch(`/api/waters/${searchQuery}`);
     const waters = await response.json();
 
-    for (const water of waters) {
-        watersContainer.innerHTML += `
+    if (waters.length === 0) {
+        watersContainer.innerHTML = '<p>Keine Gewässer mit diesen Namen gefunden</p>';
+    }
+    else {
+        for (const water of waters) {
+            watersContainer.innerHTML += `
             <div class="water">
                 <h2>${water.longname}</h2>
                 <h3>${water.shortname}</h3>
             </div>
         `;
+        }
     }
 });
