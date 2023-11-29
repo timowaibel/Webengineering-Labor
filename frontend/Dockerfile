@@ -4,14 +4,11 @@ FROM node:14
 WORKDIR /app
 
 # install dependencies
-COPY package*.json /app
+COPY package*.json .
 RUN npm install
 
 # copy the rest of the files
-COPY . /app
-
-# expose port 80
-EXPOSE 80
+COPY . .
 
 # start the app
 CMD ["npm", "run", "start"]
