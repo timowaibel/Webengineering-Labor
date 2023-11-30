@@ -1,6 +1,6 @@
 import express from 'express';
-import { watersRouter } from './routes/waters.js';
-import { measurementRouter } from './routes/measurement.js';
+import { watersRouter } from './routes/watersRoute.js';
+import { measurementRouter } from './routes/measurementRoute.js';
 
 const app = express();
 

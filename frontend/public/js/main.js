@@ -7,9 +7,14 @@ searchForm.addEventListener('submit', async (event) => {
 
     const searchQuery = searchBarInput.value;
 
-    watersContainer.innerHTML = '';
+    watersContainer.innerHTML = `
+    <div class="loading">
+        <p>Laden...<p>
+    </div>    
+    `;
 
     if (searchQuery === '') {
+        watersContainer.innerHTML = '';
         return;
     }
 
@@ -20,13 +25,18 @@ searchForm.addEventListener('submit', async (event) => {
         watersContainer.innerHTML = '<p>Keine Gewässer mit diesen Namen gefunden</p>';
     }
     else {
-        for (const water of waters) {
-            watersContainer.innerHTML += `
-            <div class="water">
-                <h2>${water.longname}</h2>
-                <h3>${water.shortname}</h3>
-            </div>
-        `;
-        }
+        displayWaters(waters);
     }
 });
+
+function displayWaters(waters) {
+    watersContainer.innerHTML = '';
+    for (const water of waters) {
+        watersContainer.innerHTML += `
+        <div class="water">
+            <h2>${water.longname}</h2>
+            <h3>${water.shortname}</h3>
+        </div>
+        `;
+    }
+}
