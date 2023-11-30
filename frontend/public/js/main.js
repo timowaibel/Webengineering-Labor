@@ -8,9 +8,10 @@ searchForm.addEventListener('submit', async (event) => {
     const searchQuery = searchBarInput.value;
 
     watersContainer.innerHTML = `
-    <div class="loading">
-        <p>Laden...<p>
-    </div>    
+    <div class="spinner-container">
+        <div class="spinner"></div>
+        <div class="spinner-text">Loading...</div>
+    </div>
     `;
 
     if (searchQuery === '') {
@@ -34,9 +35,20 @@ function displayWaters(waters) {
     for (const water of waters) {
         watersContainer.innerHTML += `
         <div class="water">
-            <h2>${water.longname}</h2>
-            <h3>${water.shortname}</h3>
+            <h2>${water.longname} (${water.shortname})</h2>
+            <div class="station-container">
+                <h4>Stationen:</h4>
+                <ul class="stations">
+                    ${water.stations.map(station => `<li onclick="getMasurementsfromStation('${station.uuid}')">${station.longname}</li>`).join('')}
+                </ul>
+            </div>
         </div>
         `;
     }
+}
+
+function getMasurementsfromStation(uuid) {
+    fetch(`/api/measurements/${uuid}`)
+        .then(response => response.json())
+        .then(measurements => console.log(measurements));
 }
