@@ -44,4 +44,20 @@ docker-compose up --build -d
 
 ## Run Deployment Server (Kubernetes)
 
-TODO
+Add deployment and service files to kubernetes cluster
+
+```bash
+kubectl apply -f ./kubernetes/backend-deployment.yaml
+kubectl apply -f ./kubernetes/backend-service.yaml
+kubectl apply -f ./kubernetes/frontend-deployment.yaml
+kubectl apply -f ./kubernetes/frontend-service.yaml
+```
+
+To delete the deployment and service files from the kubernetes cluster use the following commands
+
+```bash
+kubectl delete -f ./kubernetes/backend-deployment.yaml
+kubectl delete -f ./kubernetes/backend-service.yaml
+kubectl delete -f ./kubernetes/frontend-deployment.yaml
+kubectl delete -f ./kubernetes/frontend-service.yaml
+```
