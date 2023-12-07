@@ -1,6 +1,9 @@
 const searchBarInput = document.getElementById('search-bar-input');
 const searchForm = document.getElementById('search-form');
 const watersContainer = document.getElementById('waters-container');
+const modalTitle = document.getElementById('modal-title');
+const visualizationContainer = document.getElementById('visualization-container');
+const modal = new bootstrap.Modal(document.getElementById('modal'));
 
 searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -39,7 +42,7 @@ function displayWaters(waters) {
             <div class="station-container">
                 <h4>Stationen:</h4>
                 <ul class="stations">
-                    ${water.stations.map(station => `<li onclick="getMasurementsfromStation('${station.uuid}')">${station.longname}</li>`).join('')}
+                    ${water.stations.map(station => `<li onclick="displayMeasurementsForStation('${station.uuid}')">${station.longname}</li>`).join('')}
                 </ul>
             </div>
         </div>
@@ -48,7 +51,18 @@ function displayWaters(waters) {
 }
 
 function getMasurementsfromStation(uuid) {
-    fetch(`/api/measurements/${uuid}`)
-        .then(response => response.json())
-        .then(measurements => console.log(measurements));
+    return fetch(`/api/measurements/${uuid}`)
+        .then(response => response.json());
+}
+
+async function displayMeasurementsForStation(uuid) {
+    const measurements = await getMasurementsfromStation(uuid);
+    visualizationContainer.innerHTML = `
+        <iframe
+            src="https://www.pegelonline.wsv.de/webservices/zeitreihe/visualisierung?pegeluuid=${uuid}&eingebettet=ja"
+            scrolling="no" marginheight="0" marginwidth="0" frameborder="0" width="730" height="450">
+        </iframe>
+    `;
+    modalTitle.innerText = "measurements[0].shortname";
+    modal.toggle();
 }
