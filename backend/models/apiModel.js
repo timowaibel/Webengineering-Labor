@@ -8,6 +8,17 @@ const getAllWatersWithStations = async () => {
     return waters;
 };
 
+const getStation = async (uuidStation) => {
+    try {
+        const result = await got.get(`${apiBaseUrl}/stations/${uuidStation}.json?includeTimeseries=true&includeCurrentMeasurement=true`);
+        const station = JSON.parse(result.body);
+        return station;
+    }
+    catch (error) {
+        return {};
+    }
+};
+
 const getMeasurementsFromStation = async (uuidStation) => {
     try {
         const result = await got.get(`${apiBaseUrl}/stations/${uuidStation}/W/measurements.json`);
@@ -19,4 +30,4 @@ const getMeasurementsFromStation = async (uuidStation) => {
     }
 };
 
-export { getAllWatersWithStations, getMeasurementsFromStation };
+export { getAllWatersWithStations, getStation, getMeasurementsFromStation };

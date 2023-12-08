@@ -1,16 +1,12 @@
 import express from 'express';
-import { watersRouter } from './routes/watersRoute.js';
-import { measurementRouter } from './routes/measurementRoute.js';
+import { waterRouter } from './routes/waterRoute.js';
+import { stationRouter } from './routes/stationRoute.js';
 
 const app = express();
 
-app.use('/waters', watersRouter);
+app.use('/waters', waterRouter);
 
-app.use('/measurements', measurementRouter);
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+app.use('/station', stationRouter);
 
 app.all('*', (req, res) => {
     res.status(404).send('Not Found');

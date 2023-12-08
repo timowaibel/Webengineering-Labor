@@ -50,19 +50,19 @@ function displayWaters(waters) {
     }
 }
 
-function getMasurementsfromStation(uuid) {
-    return fetch(`/api/measurements/${uuid}`)
+function getStation(uuid) {
+    return fetch(`/api/station/${uuid}`)
         .then(response => response.json());
 }
 
 async function displayMeasurementsForStation(uuid) {
-    const measurements = await getMasurementsfromStation(uuid);
+    const station = await getStation(uuid);
     visualizationContainer.innerHTML = `
         <iframe
             src="https://www.pegelonline.wsv.de/webservices/zeitreihe/visualisierung?pegeluuid=${uuid}&eingebettet=ja"
             scrolling="no" marginheight="0" marginwidth="0" frameborder="0" width="730" height="450">
         </iframe>
     `;
-    modalTitle.innerText = "measurements[0].shortname";
+    modalTitle.innerText = `${station.longname} (${station.shortname}): ${station.agency}`;
     modal.toggle();
 }
