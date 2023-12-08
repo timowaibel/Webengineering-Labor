@@ -22,8 +22,7 @@ searchForm.addEventListener('submit', async (event) => {
         return;
     }
 
-    const response = await fetch(`/api/waters/${searchQuery}`);
-    const waters = await response.json();
+    const waters = await getWaters(searchQuery);
 
     if (waters.length === 0) {
         watersContainer.innerHTML = '<p>Keine Gewässer mit diesen Namen gefunden</p>';
@@ -50,11 +49,6 @@ function displayWaters(waters) {
     }
 }
 
-function getStation(uuid) {
-    return fetch(`/api/station/${uuid}`)
-        .then(response => response.json());
-}
-
 async function displayMeasurementsForStation(uuid) {
     const station = await getStation(uuid);
     visualizationContainer.innerHTML = `
@@ -65,4 +59,14 @@ async function displayMeasurementsForStation(uuid) {
     `;
     modalTitle.innerText = `${station.longname} (${station.shortname}): ${station.agency}`;
     modal.toggle();
+}
+
+async function getStation(uuid) {
+    const response = await fetch(`/api/station/${uuid}`);
+    return await response.json();
+}
+
+async function getWaters(searchQuery) {
+    const response = await fetch(`/api/water/${searchQuery}`);
+    return await response.json();
 }

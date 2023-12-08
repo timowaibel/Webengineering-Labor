@@ -3,6 +3,9 @@ import { getStation, getMeasurementsFromStation } from '../models/apiModel.js';
 
 const stationRouter = express.Router();
 
+/**
+ * Get a station by UUID, including timeseries and current measurement.
+ */
 stationRouter.get('/:uuidStation', async (req, res) => {
     const uuidStation = req.params.uuidStation;
     const stationPromise = getStation(uuidStation);

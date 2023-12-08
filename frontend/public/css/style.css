@@ -51,22 +51,18 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    /* Adjust as needed */
     margin: 0 -10px;
-    /* Negative margin to counteract spacing within flex container */
 }
 
 .water {
     flex: 1;
     width: 80%;
     margin: 10px;
-    /* Adjust spacing between water elements */
     padding: 15px;
     background-color: #333;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-align: center;
-    /* Center text within water element */
 }
 
 .water h2 {
